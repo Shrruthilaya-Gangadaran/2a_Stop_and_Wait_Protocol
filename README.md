@@ -22,19 +22,16 @@ s = socket.socket()
 s.bind(('localhost',8000))
 s.listen(5)
 c, addr = s.accept()
-size = int(input("Enter number of frames to send : "))
-l = list(range(size))
-s = int(input("Enter Window Size : "))
-st = 0
-i = 0
 while True:
-    while(i<len(l)):
-        st += s
-        c.send(str(l[i:st]).encode())
-        ack = c.recv(1024).decode()
-        if ack:
-            print(ack)
-            i += s
+    i = input("Enter a data : ")
+    c.send(i.encode())
+    ack = c.recv(1024).decode()
+    if ack:
+        print(ack)
+        continue
+    else:
+        c.close()
+        break
 ```
 ### SERVER:
 ```
@@ -43,17 +40,18 @@ s = socket.socket()
 s.connect(('localhost',8000))
 while True:
     print(s.recv(1024).decode())
-    s.send("Acknowledgement Received from the server".encode())
+    s.send("Acknowledgment Received".encode())
 ```
 
 ## OUTPUT:
 
 ### CLIENT:
+![Client](https://github.com/Shrruthilaya-Gangadaran/2a_Stop_and_Wait_Protocol/assets/93427705/7ced9352-ac66-4a56-90e9-84f3169c6a33)
 
-![output1](https://github.com/Shrruthilaya-Gangadaran/2a_Stop_and_Wait_Protocol/assets/93427705/894b0192-b1f6-4f7e-ad97-de56642a2745)
 
 ### SERVER:
-![output2](https://github.com/Shrruthilaya-Gangadaran/2a_Stop_and_Wait_Protocol/assets/93427705/146e6f89-566e-4628-a1f6-dcb18e0fb723)
+
+![Server](https://github.com/Shrruthilaya-Gangadaran/2a_Stop_and_Wait_Protocol/assets/93427705/e0184249-3f8d-4ed7-966a-3d0a33126465)
 
 
 ## RESULT:
